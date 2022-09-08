@@ -5,6 +5,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import filedialog as fd
 
+
 def handleImageButton():
     filename = fd.askopenfilename(
         filetypes=(
@@ -12,14 +13,16 @@ def handleImageButton():
             ('All files', '*.*')
         )
     )
-    mask_image(right_frame, filename)
+    mask_image(labelRight, filename)
+
 
 def handleVideoButton():
     filename = fd.askopenfilename()
-    mask_video(right_frame, filename)
+    mask_video(filename)
 
 def handleMaskWebCamButton():
-    mask_video(right_frame, 0)
+    mask_video(0)
+    
 
 if __name__ == '__main__':
 
@@ -32,7 +35,7 @@ if __name__ == '__main__':
     window = tk.Tk()
     window.title('Nhóm 13')
 
-    window_width = 800
+    window_width = 820
     window_height = 400
     # get the screen dimension
     screen_width = window.winfo_screenwidth()
@@ -46,33 +49,36 @@ if __name__ == '__main__':
 
     #Left frame
     left_frame = Frame(window, bg = background,
-                        width = window_width/4, height = window_height,
                         padx = 20, pady = 5
                 )
-    left_frame.grid(column = 0, row = 0)
+    left_frame.pack(side = tk.LEFT)
     #Right frame
     global right_frame
     right_frame = Frame(window, bg = '#f8f8f8',
-                        width = 500, height = window_height,
-                        padx = 20, pady= 20
+                        padx = 5, pady= 5
                 )
-    right_frame.grid(column = 1, row = 0)
-    print(screen_height, window_height)
+    right_frame.pack(side =tk.RIGHT)
     #Label
-    label = Label(left_frame, text = 'Chọn chức năng: ',
+    labelLeft = Label(left_frame, text = 'Chọn chức năng: ',
                     justify= CENTER, 
                     font = ("Times New Roman", 20, 'bold'),
                     fg = 'white', bg = background,
                     pady = 25
                     )
-    label.grid(column = 0, row = 0)
+    labelLeft.grid(column = 0, row = 0)
+
+    global labelRight
+    labelRight = Label(right_frame, width= '550', height= '300')
+    labelRight.grid(column = 0, row = 0, columnspan = 3, rowspan= 3)
+    
     #Detect mask image button 
     btnMaskImg = Button(left_frame, text = "Nhận diện qua ảnh", 
                     command = handleImageButton,
                     font = ("Times New Roman", 12, 'bold'),
                     height = 2, width = 25,
                     bg = bgButton, fg = colorButton,
-                    activebackground = activeBgBtn
+                    activebackground = activeBgBtn,
+                    cursor = 'mouse'
                 )
     btnMaskImg.grid(column = 0, row = 1)
     
@@ -82,7 +88,8 @@ if __name__ == '__main__':
                     font = ("Times New Roman", 12, 'bold'),
                     height = 2, width = 25,
                     bg = bgButton, fg = colorButton,
-                    activebackground = activeBgBtn
+                    activebackground = activeBgBtn,
+                    cursor = 'mouse'
                 )
     btnMaskVideo.grid(column = 0, row = 3)
     
@@ -92,7 +99,8 @@ if __name__ == '__main__':
                     font = ("Times New Roman", 12, 'bold'),
                     height = 2, width = 25,
                     bg = bgButton, fg = colorButton,
-                    activebackground = activeBgBtn
+                    activebackground = activeBgBtn,
+                    cursor = 'mouse'
                 )
     btnMaskWebcam.grid(column = 0, row = 5)
     

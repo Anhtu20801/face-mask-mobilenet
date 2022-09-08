@@ -1,18 +1,25 @@
 # import the necessary packages
-from bound_box import bound_box_and_predict
-from show_frame import show_frames
 from imutils.video import VideoStream
+from tkinter import *
+from PIL import Image, ImageTk
 import imutils
 import cv2
+from bound_box import bound_box_and_predict
 
+# def show_frame():
+#     # Convert image to PhotoImage
+#     label.configure(image = None)
+#     imgtk = ImageTk.PhotoImage(image = img)
+#     label.imgtk = imgtk
+#     label.configure(image = imgtk)
+#     label.after(2, show_frame)
 
-def mask_video(window, videoPath):
+def mask_video(videoPath):
 	# initialize the video stream
 	print("[INFO] starting video stream...")
-	
+	# global vs, label
+	# label = labelRight
 	vs = VideoStream(src=videoPath).start()
-
-	# loop over the frames from the video stream
 	while True:
 		# grab the frame from the threaded video stream and resize it
 		# to have a maximum width of 400 pixels
